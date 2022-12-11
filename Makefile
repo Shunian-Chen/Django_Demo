@@ -2,13 +2,12 @@ install:
 	pip install --upgrade pip &&\
 		pip install -r requirements.txt
 
-test:
-	python -m pytest -vv test_*.py
-
-format:	
-	black *.py dblib/*py
+format:
+	black *.py
 
 lint:
-	pylint --disable=R,C --ignore-patterns=test_.*?py *.py dblib
+	pylint --output-format=colorized --disable=R,C,W1203,W1202,W1514 *.py
+test:
+	python test.py
 
-all: install lint test
+all: install format lint test
